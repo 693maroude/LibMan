@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const mysql = require('mysql');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,14 +6,15 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-const exphbs = require('express-handlebars');
+const bcrypt = require('bcryptjs');
+var path = require('path');
 
 
 var con = mysql.createConnection({
   host     : 'localhost',
 	user     : 'root',
-	password : '',
-	database : 'bookit'
+	password : '#jimmypage8877#',
+	database : 'LibMan'
 });
 
 con.connect(function(err){
@@ -47,13 +47,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
-
 // Express Validator Middleware
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -72,17 +65,62 @@ app.use(expressValidator({
   }
 }));
 
+// Initial Route
+app.get('/', function(req, res){
+  res.sendFile(path.join(__dirname+'/routes/index.html'));
+});
+
+app.post('/', function(req, res, next){
+  passport.authenticate('local', {
+    successRedirect:'/query',
+    failureRedirect:'/login',
+    failureFlash: true
+  })(req, res, next);
+});
 
 
-// Route Files
-let books = require('./routes/books');
-let users = require('./routes/users');
-let index = require('./routes/index');
+// Login Process
+app.get('/login', function(req, res){
+  res.sendFile(path.join(__dirname+'/routes/index.html'));
+});
 
-app.use('/', index);
-app.use('/books', books);
-app.use('/users', users);
+app.post('/login', function(req, res, next){
+  passport.authenticate('local', {
+    successRedirect:'/query',
+    failureRedirect:'/login',
+    failureFlash: true
+  })(req, res, next);
+});
 
+
+// Query Route
+app.get('/query', function(req, res){
+  res.sendFile(path.join(__dirname+'/routes/query.html'));
+});
+
+app.post('/query', function(req, res){
+  con.query(
+    // Add mySQL query here!
+  )
+});
+
+
+// Displaying Query Route
+app.get('/query_results', function(req, res){
+  res.sendFile(path.join(__dirname + '/routes/query_results.html'));
+});
+
+app.post('/query_results', function(req, res){
+  con.query(
+    // Add mySQL query here!
+  )
+});
+
+
+// Logout
+app.get('/logout', function(req, res){
+  res.redirect('/login');
+});
 
 // Start Server
 app.listen(8000, function(){
