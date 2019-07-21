@@ -9,11 +9,10 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 var path = require('path');
 
-
 var con = mysql.createConnection({
   host     : 'localhost',
 	user     : 'root',
-	password : '#jimmypage8877#',
+	password : '',
 	database : 'LibMan'
 });
 
@@ -31,7 +30,7 @@ const app = express();
 
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'ejs');
 
 //Body parser middleware
 app.use(bodyParser.json({type:'application/json'}));
@@ -65,37 +64,22 @@ app.use(expressValidator({
   }
 }));
 
-// Initial Route
+// Initial Route (Login page)
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname+'/routes/index.html'));
-});
-
-app.post('/', function(req, res, next){
-  passport.authenticate('local', {
-    successRedirect:'/query',
-    failureRedirect:'/login',
-    failureFlash: true
-  })(req, res, next);
-});
-
-
-// Login Process
-app.get('/login', function(req, res){
-  res.sendFile(path.join(__dirname+'/routes/index.html'));
+  res.render('login');
 });
 
 app.post('/login', function(req, res, next){
   passport.authenticate('local', {
     successRedirect:'/query',
-    failureRedirect:'/login',
+    failureRedirect:'/',
     failureFlash: true
   })(req, res, next);
 });
 
-
 // Query Route
 app.get('/query', function(req, res){
-  res.sendFile(path.join(__dirname+'/routes/query.html'));
+  res.render('query');
 });
 
 app.post('/query', function(req, res){
@@ -119,7 +103,9 @@ app.post('/query_results', function(req, res){
 
 // Logout
 app.get('/logout', function(req, res){
-  res.redirect('/login');
+  res.logout();
+  req.session.destroy();
+  res.redirect('/');
 });
 
 // Start Server
