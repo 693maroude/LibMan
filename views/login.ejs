@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-  <title>LibMan</title>
+  <title>LibMan - login</title>
 
   <link rel="stylesheet" href="/css/login.css">
 
@@ -32,10 +32,17 @@
         <h3>Login</h3>
         <form action="/login" method="post">
           <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username">
+            <div class="input-wrapper">
+              <span class="input-group-text" id="basic-addon1">Username</span>
+              <input type="text" class="form-control text-area" name="username" placeholder="Username">
+            </div>
+
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <div class="input-wrapper">
+              <span class="input-group-text" id="basic-addon1">Password</span>
+              <input type="password" class="form-control text-area" name="password" placeholder="Password">
+            </div>
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-warning btn-lg btn-block">Sign In</button>

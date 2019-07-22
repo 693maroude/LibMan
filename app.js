@@ -10,18 +10,18 @@ const bcrypt = require('bcryptjs');
 var path = require('path');
 
 var con = mysql.createConnection({
-  host     : 'localhost',
-	user     : 'root',
-	password : '',
-	database : 'LibMan'
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'LibMan'
 });
 
-con.connect(function(err){
-    if(!err) {
-        console.log("Database is connected");
-    } else {
-        console.log("Error while connecting with database");
-    }
+con.connect(function (err) {
+  if (!err) {
+    console.log("Database is connected");
+  } else {
+    console.log("Error while connecting with database");
+  }
 });
 
 
@@ -33,8 +33,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //Body parser middleware
-app.use(bodyParser.json({type:'application/json'}));
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json({
+  type: 'application/json'
+}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,41 +52,41 @@ app.use(session({
 
 // Express Validator Middleware
 app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
+  errorFormatter: function (param, msg, value) {
+    var namespace = param.split('.'),
+      root = namespace.shift(),
+      formParam = root;
 
-    while(namespace.length) {
+    while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
     return {
-      param : formParam,
-      msg   : msg,
-      value : value
+      param: formParam,
+      msg: msg,
+      value: value
     };
   }
 }));
 
 // Initial Route (Login page)
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
   res.render('login');
 });
 
-app.post('/login', function(req, res, next){
+app.post('/login', function (req, res, next) {
   passport.authenticate('local', {
-    successRedirect:'/query',
-    failureRedirect:'/',
+    successRedirect: '/query',
+    failureRedirect: '/',
     failureFlash: true
   })(req, res, next);
 });
 
 // Query Route
-app.get('/query', function(req, res){
+app.get('/query', function (req, res) {
   res.render('query');
 });
 
-app.post('/query', function(req, res){
+app.post('/query', function (req, res) {
   con.query(
     // Add mySQL query here!
   )
@@ -90,11 +94,11 @@ app.post('/query', function(req, res){
 
 
 // Displaying Query Route
-app.get('/query_results', function(req, res){
-  res.sendFile(path.join(__dirname + '/routes/query_results.html'));
+app.get('/query_results', function (req, res) {
+  res.render('queryresults');
 });
 
-app.post('/query_results', function(req, res){
+app.post('/query_results', function (req, res) {
   con.query(
     // Add mySQL query here!
   )
@@ -102,13 +106,13 @@ app.post('/query_results', function(req, res){
 
 
 // Logout
-app.get('/logout', function(req, res){
+app.get('/logout', function (req, res) {
   res.logout();
   req.session.destroy();
   res.redirect('/');
 });
 
 // Start Server
-app.listen(8000, function(){
+app.listen(8000, function () {
   console.log('Server started on port 8000');
 });
