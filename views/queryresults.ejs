@@ -30,10 +30,10 @@
                             <span class="caption-helper">search for books...</span>
                         </div>
                         <div class="actions">
-                                <a href="/query" class="btn">
-									<i class="glyphicon glyphicon-circle-arrow-left"></i>
-									Back
-								</a>
+                            <a href="/query" class="btn">
+                                <i class="glyphicon glyphicon-circle-arrow-left"></i>
+                                Back
+                            </a>
                             <a href="/logout" class="btn">
                                 <i class="glyphicon glyphicon-user"></i>
                                 Logout
@@ -43,6 +43,8 @@
                     <div class="portlet-body">
                         <section class="search-sec">
                             <div class="container">
+                                <% if (data) { %>
+                                <% data.forEach(function(item){ %>
                                 <div class="item">
                                     <div class="col-lg-12 margin">
                                         <div class="col-lg-2 col-md-3 col-sm-4 mt-3 mb-3">
@@ -51,67 +53,54 @@
                                         </div>
                                         <div class="col-lg-10 col-md-3 col-sm-4 mt-3 data-holder">
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
+                                                <div class="col-lg-12 col-md-8 col-sm-12 ">
+                                                    <div class="input-wrapper">
+                                                        <span class="input-group-text" id="basic-addon1">Book
+                                                            Title</span>
+                                                        <input type="text" class="form-control search-slt"
+                                                            value="<%= item.Title %>" name="Title" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-8 col-md-4 col-sm-12 mb-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
-                                                </div>
-                                            </div>
+                                            </div><br>
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 mt-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
+                                                <div class="col-lg-6 col-md-4 col-sm-12">
+                                                    <div class="input-wrapper">
+                                                        <span class="input-group-text" id="basic-addon1">ISBN</span>
+                                                        <input type="text" class="form-control search-slt"
+                                                            Value="<%= item.ISBN %>" name="ISBN" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 mt-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                                    <div class="input-wrapper">
+                                                        <span class="input-group-text" id="basic-addon1">Book
+                                                            Author</span>
+                                                        <input type="text" class="form-control search-slt"
+                                                            value="<%= item.Author %>" name="Author" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 mt-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
-                                                </div>
-                                            </div>
+                                            </div><br>
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 mt-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
+                                                <div class="col-lg-6 col-md-4 col-sm-12 ">
+                                                    <div class="input-wrapper">
+                                                        <span class="input-group-text" id="basic-addon1">Published
+                                                            Date</span>
+                                                        <input type="text" class="form-control search-slt"
+                                                        value="<%= item.PublicationDate %>" name="Published_date" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 mt-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12 mb-3 mt-3">
-                                                    <input type="text" class="form-control search-slt"
-                                                        placeholder="ISBN">
-                                                </div>
-                                            </div>
+                                                <div class="col-lg-4 col-md-3 col-sm-12 ">
+                                                    <div class="input-wrapper">
+                                                        <span class="input-group-text" id="basic-addon1">Edition</span>
+                                                        <input type="text" class="form-control search-slt"
+                                                            value="<%= item.BookEdition %>" name="Edition" disabled>
+                                                    </div>
+                                                </div>                                                
+                                            </div><br>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
+                                <% }); %>
+                                <% } %>
                             </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ var path = require('path');
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '#jimmypage8877#',
+  password: '',
   database: 'libman'
 });
 
@@ -88,7 +88,7 @@ app.get('/query', function (req, res) {
 
 app.post('/query', function (req, res) {
   let selectQuery =
-    "SELECT * FROM Book WHERE (?? = ? ) OR (?? = ?) OR (?? = ? ) OR (?? = ?) OR (?? = ?) OR (?? = ?)";
+    "SELECT * FROM book WHERE (?? = ?) OR (?? = ?) OR (?? = ? ) OR (?? = ?) OR (?? = ?) AND (?? = ?)";
   let query = mysql.format(selectQuery, [
     "Title", req.body.Title,
     "ISBN", req.body.ISBN,
@@ -103,21 +103,13 @@ app.post('/query', function (req, res) {
         console.log(err);
         return;
       }
-      console.log(rows);
-
+      // console.log(query);
       res.render('queryresults', {
         data: rows
       });
-
     }
   );
 
-});
-
-
-// Displaying Query Route
-app.get('/query_results', function (req, res) {
-  res.render('queryresults');
 });
 
 // Logout
