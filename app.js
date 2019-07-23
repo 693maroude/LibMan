@@ -12,8 +12,8 @@ var path = require('path');
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'LibMan'
+  password: '#jimmypage8877#',
+  database: 'libman'
 });
 
 con.connect(function (err) {
@@ -87,29 +87,31 @@ app.get('/query', function (req, res) {
 });
 
 app.post('/query', function (req, res) {
-  console.log(req.body);
   let selectQuery =
-    "SELECT * FROM Book WHERE (?? = ? OR ?? LIKE '%?') OR (?? = ?) OR (?? = ? OR ?? LIKE '%?') OR (?? = ?) OR (?? = ?) OR (?? = ?)";
+    "SELECT * FROM Book WHERE (?? = ? ) OR (?? = ?) OR (?? = ? ) OR (?? = ?) OR (?? = ?) OR (?? = ?)";
   let query = mysql.format(selectQuery, [
-    "title", req.body.Title,
+    "Title", req.body.Title,
     "ISBN", req.body.ISBN,
-    "author", req.body.Author,
-    "edition", req.body.Edition,
-    "pubDate", req.body.Published_date,
-    "issueStatus", req.body.toggle_option
+    "Author", req.body.Author,
+    "BookEdition", req.body.Edition,
+    "PublicationDate", req.body.Published_date,
+    "issue_status", req.body.toggle_option
   ]);
   con.query(query,
     function (err, rows) {
       if (err) {
-        console.error(err);
+        console.log(err);
         return;
       }
       console.log(rows);
+
+      res.render('queryresults', {
+        data: rows
+      });
+
     }
   );
-  res.render('queryresults', {
-    data: req.rows
-  });
+
 });
 
 
@@ -125,6 +127,6 @@ app.get('/logout', function (req, res) {
 });
 
 // Start Server
-app.listen(8000, function () {
+app.listen(5000, function () {
   console.log('Server started on port 8000');
 });
