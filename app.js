@@ -89,7 +89,7 @@ app.get('/query', function (req, res) {
 app.post('/query', function (req, res) {
   console.log(req.body);
   let selectQuery =
-    "SELECT * FROM Book WHERE (?? = ? OR ?? LIKE '%?') AND (?? = ?) AND (?? = ? OR ?? LIKE '%?') AND (?? = ?) AND (?? = ?) AND (?? = ?)1";
+    "SELECT * FROM Book WHERE (?? = ? OR ?? LIKE '%?') OR (?? = ?) OR (?? = ? OR ?? LIKE '%?') OR (?? = ?) OR (?? = ?) OR (?? = ?)";
   let query = mysql.format(selectQuery, [
     "title", req.body.Title,
     "ISBN", req.body.ISBN,
@@ -108,7 +108,7 @@ app.post('/query', function (req, res) {
     }
   );
   res.render('queryresults', {
-    data: req.body
+    data: req.rows
   });
 });
 
@@ -117,13 +117,6 @@ app.post('/query', function (req, res) {
 app.get('/query_results', function (req, res) {
   res.render('queryresults');
 });
-
-app.post('/query_results', function (req, res) {
-  con.query(
-    // Add mySQL query here!
-  )
-});
-
 
 // Logout
 app.get('/logout', function (req, res) {
