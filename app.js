@@ -73,7 +73,7 @@ app.get('/', function (req, res) {
   res.render('login');
 });
 
-app.post('/login', function (req, res, next) {
+app.post('/', function (req, res, next) {
   passport.authenticate('local', {
     successRedirect: '/query',
     failureRedirect: '/',
@@ -127,7 +127,6 @@ app.post('/query_results', function (req, res) {
 
 // Logout
 app.get('/logout', function (req, res) {
-  res.logout();
   req.session.destroy();
   res.redirect('/');
 });
