@@ -56,7 +56,7 @@
 														<div class="input-wrapper">
 															<span class="input-group-text" id="basic-addon1">ISBN</span>
 															<input type="text" class="form-control search-slt"
-																placeholder="ISBN">
+																placeholder="ISBN" name="ISBN">
 														</div>
 													</div>
 													<div class="col-lg-8 col-md-8 col-sm-12 ">
@@ -64,7 +64,7 @@
 															<span class="input-group-text" id="basic-addon1">Book
 																Title</span>
 															<input type="text" class="form-control search-slt"
-																placeholder="Book Title">
+																placeholder="Book Title" name="Title">
 														</div>
 													</div>
 												</div><br>
@@ -74,7 +74,7 @@
 															<span class="input-group-text" id="basic-addon1">Book
 																Author</span>
 															<input type="text" class="form-control search-slt"
-																placeholder="Book Author">
+																placeholder="Book Author" name="Author">
 														</div>
 													</div>
 													<div class="col-lg-4 col-md-3 col-sm-12">
@@ -82,7 +82,7 @@
 															<span class="input-group-text"
 																id="basic-addon1">Category</span>
 															<input type="text" class="form-control search-slt"
-																placeholder="Category">
+																placeholder="Category" name="Category">
 														</div>
 													</div>
 													<div class="col-lg-4 col-md-3 col-sm-12 ">
@@ -90,7 +90,7 @@
 															<span class="input-group-text"
 																id="basic-addon1">Edition</span>
 															<input type="text" class="form-control search-slt"
-																placeholder="Edition">
+																placeholder="Edition" name="Edition">
 														</div>
 													</div>
 												</div><br>
@@ -100,7 +100,7 @@
 															<span class="input-group-text" id="basic-addon1">Published
 																Date</span>
 															<input id="picker" name="date" type="date"
-																class="form-control search-slt">
+																class="form-control search-slt" name="Published_date">
 														</div>
 													</div>
 													<div class="col-lg-4 col-md-4 col-sm-12 ">
@@ -108,7 +108,7 @@
 															<span class="input-group-text" id="basic-addon1">Issued
 																Date</span>
 															<input id="picker" name="date" type="date"
-																class="form-control search-slt">
+																class="form-control search-slt" name="Issued_date">
 														</div>
 													</div>
 													<div class="col-lg-4 col-md-4 col-sm-12 ">
@@ -116,10 +116,10 @@
 															<span class="input-group-text"
 																id="basic-addon1">Availability</span>
 															<div class="toggle_radio">
-																<input type="radio" class="toggle_option"
-																	id="first_toggle" name="toggle_option">
 																<input type="radio" checked class="toggle_option"
-																	id="second_toggle" name="toggle_option">
+																	id="first_toggle" name="toggle_option" value="Available">
+																<input type="radio" class="toggle_option"
+																	id="second_toggle" name="toggle_option" value="Not_available">
 																<label for="first_toggle">Available</label>
 																<label for="second_toggle">Not Available</label>
 																<div class="toggle_option_slider">
@@ -131,8 +131,8 @@
 												<div class="row">
 													<div class="col-lg-12 col-md-12 col-sm-12">
 														<div class="input-wrapper">
-															<button type="button"
-																class="btn btn-danger wrn-btn">Search</button>
+															<input type="submit" value="submit"
+																class="btn btn-danger wrn-btn">
 														</div>
 													</div>
 												</div>
